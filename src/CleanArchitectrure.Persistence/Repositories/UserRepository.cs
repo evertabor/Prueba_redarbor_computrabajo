@@ -8,9 +8,9 @@ namespace CleanArchitectrure.Persistence.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private readonly DapperContext _applicationContext;
+        private readonly DataBaseContext _applicationContext;
 
-        public UserRepository(DapperContext applicationContext)
+        public UserRepository(DataBaseContext applicationContext)
         {
             _applicationContext = applicationContext ?? throw new ArgumentNullException(nameof(applicationContext));
         }

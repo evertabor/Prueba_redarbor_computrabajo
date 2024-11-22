@@ -2,9 +2,8 @@
 
 namespace CleanArchitectrure.Application.Interface.Persistence
 {
-    public interface ICustomerRepository: IGenericRepository<Customer>
+    public interface ICustomerRepository: IGenericRepository<Employee>
     {
-        Task<int> CountAsync();
-        Task<IEnumerable<Customer>> GetAllWithPaginationAsync(int pageNumber, int pageSize);
+
     }
 }

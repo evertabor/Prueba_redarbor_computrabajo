@@ -3,6 +3,10 @@
     public interface IUnitOfWork: IDisposable
     {
         IUserRepository Users { get; }
-        ICustomerRepository Customers { get; }
+        ICustomerRepository Employees { get; }
+        void SaveChanges();
+        Task SaveChangesAsync();
+
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using CleanArchitectrure.Application.UseCases.Commons.Bases;
 using CleanArchitectrure.Application.UseCases.Commons.Exceptions;
+using System.Net;
 using System.Text.Json;
 
 namespace CleanArchitectrure.WebApi.Extensions.Middleware
@@ -21,9 +22,32 @@ namespace CleanArchitectrure.WebApi.Extensions.Middleware
             }
             catch (ValidationExceptionCustom ex)
             {
-                context.Response.ContentType = "application/json";
-                await JsonSerializer.SerializeAsync(context.Response.Body, new BaseResponse<object> { Message = "Validation Errors", Errors = ex.Errors });
+                await HandleExceptionAsync(context, ex, (int)HttpStatusCode.BadRequest);
             }
+            catch (NotFoundExceptionCustom ex)
+            {
+                await HandleExceptionAsync(context, ex, (int)HttpStatusCode.NotFound);
+            }
+            catch (Exception ex) 
+            {
+                await HandleExceptionAsync(context, ex, (int)HttpStatusCode.InternalServerError);
+            }
+        }
+
+        private static Task HandleExceptionAsync(HttpContext context, Exception exception, int statusCode)
+        {
+            context.Response.ContentType = "application/json";
+            context.Response.StatusCode = statusCode;
+
+            var response = new BaseResponse<object>
+            {
+                Message = exception is ValidationExceptionCustom validationException ? "Validation Errors" : exception.Message,
+                Errors = exception is ValidationExceptionCustom validationEx ? validationEx.Errors.ToList() : null,
+                Data = null,
+                succcess = false
+            };
+
+            return context.Response.WriteAsync(JsonSerializer.Serialize(response));
         }
     }
 }

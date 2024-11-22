@@ -9,8 +9,8 @@ namespace CleanArchitectrure.Persistence
     {
         public static IServiceCollection AddInjectionPersistence(this IServiceCollection services)
         {
-            services.AddSingleton<DapperContext>();
-            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddDbContext<DataBaseContext>();
+            services.AddScoped<ICustomerRepository, EmployeeRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 

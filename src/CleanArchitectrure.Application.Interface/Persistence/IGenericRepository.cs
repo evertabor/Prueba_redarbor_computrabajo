@@ -1,13 +1,17 @@
-﻿namespace CleanArchitectrure.Application.Interface.Persistence
+﻿using CleanArchitectrure.Domain.Entities;
+using System.Linq.Expressions;
+
+namespace CleanArchitectrure.Application.Interface.Persistence
 {
     public interface IGenericRepository<T> where T : class
     {
         /* Commands */
-        Task<bool> InsertAsync(T entity);
-        Task<bool> UpdateAsync(T entity);
-        Task<bool> DeleteAsync(string id);
+        void Insert(T entity);
+        void Update(T entity);
+        void Delete(Expression<Func<T, bool>> where);
+
         /* Queries */
-        Task<T> GetAsync(string id);
+        Task<T?> GetAsync(int? id);
         Task<IEnumerable<T>> GetAllAsync();
     }
 }

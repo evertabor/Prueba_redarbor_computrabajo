@@ -1,4 +1,5 @@
 ﻿using CleanArchitectrure.Application.Interface.Persistence;
+using CleanArchitectrure.Persistence.Contexts;
 
 namespace CleanArchitectrure.Persistence.Repositories
 {
@@ -6,17 +7,29 @@ namespace CleanArchitectrure.Persistence.Repositories
     {
         public IUserRepository Users { get; }
 
-        public ICustomerRepository Customers { get; }
+        public ICustomerRepository Employees { get; }
+        private readonly DataBaseContext _context;
 
-        public UnitOfWork(IUserRepository users, ICustomerRepository customers)
+        public UnitOfWork(DataBaseContext context, IUserRepository users, ICustomerRepository customers)
         {
             Users = users ?? throw new ArgumentNullException(nameof(users));
-            Customers = customers ?? throw new ArgumentNullException(nameof(customers));
+            Employees = customers ?? throw new ArgumentNullException(nameof(customers));
+            _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
         public void Dispose()
         {
             System.GC.SuppressFinalize(this);
+        }
+
+        public void SaveChanges()
+        {
+            this._context.SaveChanges();
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await this._context.SaveChangesAsync();
         }
     }
 }

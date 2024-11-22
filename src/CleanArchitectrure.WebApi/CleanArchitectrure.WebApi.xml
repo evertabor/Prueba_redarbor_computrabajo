@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CleanArchitectrure.WebApi</name>
+    </assembly>
+    <members>
+        <member name="T:CleanArchitectrure.WebApi.Controllers.EmployeeController">
+            <summary>
+            Controller to manage employees
+            </summary>
+        </member>
+        <member name="M:CleanArchitectrure.WebApi.Controllers.EmployeeController.#ctor(MediatR.IMediator)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="mediator"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:CleanArchitectrure.WebApi.Controllers.EmployeeController.GetAllAsync">
+            <summary>
+            Get all employees items
+            </summary>
+            <returns>Array of employee items</returns>
+        </member>
+        <member name="M:CleanArchitectrure.WebApi.Controllers.EmployeeController.GetIdAsync(System.Int32)">
+            <summary>
+            Get an item by ID
+            </summary>
+            <param name="id">id employee</param>
+            <returns></returns>
+        </member>
+        <member name="M:CleanArchitectrure.WebApi.Controllers.EmployeeController.InsertAsync(CleanArchitectrure.Application.UseCases.Employees.Commands.CreateEmployeeCommand.CreateEmployeeCommand)">
+            <summary>
+            Add a new item
+            </summary>
+            <param name="command">Comando</param>
+            <returns></returns>
+        </member>
+        <member name="M:CleanArchitectrure.WebApi.Controllers.EmployeeController.UpdateAsync(CleanArchitectrure.Application.UseCases.Employees.Commands.UpdateEmployeeCommand.UpdateEmployeeCommand)">
+            <summary>
+            Update an existingitem
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CleanArchitectrure.WebApi.Controllers.EmployeeController.DeleteAsync(System.Int32)">
+            <summary>
+            Delete an item
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CleanArchitectrure.WebApi.Controllers.TokenController">
+            <summary>
+            Controller to manage Token
+            </summary>
+        </member>
+        <member name="M:CleanArchitectrure.WebApi.Controllers.TokenController.#ctor(MediatR.IMediator)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="mediator"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:CleanArchitectrure.WebApi.Controllers.TokenController.GenerateToken">
+            <summary>
+            Generate token
+            </summary>
+            <returns>Token</returns>
+        </member>
+        <member name="T:CleanArchitectrure.WebApi.Converters.CustomDateTimeConverter">
+            <summary>
+            Clase personalizada para convertir objetos DateTime a formato JSON y viceversa.
+            Se utilizan varios formatos de fecha para asegurar la correcta deserialización desde JSON.
+            </summary>
+        </member>
+        <member name="M:CleanArchitectrure.WebApi.Converters.CustomDateTimeConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            Lee una fecha desde el JSON y la convierte a un objeto DateTime.
+            Intenta parsear la fecha utilizando los formatos definidos en _formats.
+            </summary>
+            <param name="reader">El lector de JSON que contiene el valor de fecha.</param>
+            <param name="typeToConvert">El tipo al que se desea convertir (en este caso, DateTime).</param>
+            <param name="options">Opciones de configuración de la serialización.</param>
+            <returns>El valor de fecha como DateTime.</returns>
+            <exception cref="T:System.Text.Json.JsonException">Lanzada si el valor no puede ser convertido a una fecha válida.</exception>
+        </member>
+        <member name="M:CleanArchitectrure.WebApi.Converters.CustomDateTimeConverter.Write(System.Text.Json.Utf8JsonWriter,System.DateTime,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            Escribe un objeto DateTime a JSON en un formato estándar.
+            </summary>
+            <param name="writer">El escritor de JSON que recibirá el valor de fecha.</param>
+            <param name="value">El objeto DateTime a serializar.</param>
+            <param name="options">Opciones de configuración de la serialización.</param>
+        </member>
+    </members>
+</doc>
