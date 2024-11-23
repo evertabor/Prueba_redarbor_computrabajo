@@ -11,7 +11,7 @@ namespace CleanArchitectrure.Application.Interface.Persistence
         void Delete(Expression<Func<T, bool>> where);
 
         /* Queries */
-        Task<T?> GetAsync(int? id);
+        Task<T?> GetByIdAsync(int? id);
         Task<IEnumerable<T>> GetAllAsync();
     }
 }

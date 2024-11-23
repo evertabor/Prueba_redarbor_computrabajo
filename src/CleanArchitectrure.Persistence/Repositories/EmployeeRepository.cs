@@ -4,12 +4,11 @@ using CleanArchitectrure.Persistence.Contexts;
 using Dapper;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
-using System.Linq;
 using System.Linq.Expressions;
 
 namespace CleanArchitectrure.Persistence.Repositories
 {
-    public class EmployeeRepository : ICustomerRepository
+    public class EmployeeRepository : IEmployeeRepository
     {
         #region Private Fields
         private readonly DataBaseContext _context;
@@ -46,7 +45,7 @@ namespace CleanArchitectrure.Persistence.Repositories
             }
         }
 
-        public async Task<Employee?> GetAsync(int? id)
+        public async Task<Employee?> GetByIdAsync(int? id)
         {
             var query = "SELECT * FROM Employee WHERE id = @Id";
 
@@ -54,6 +53,19 @@ namespace CleanArchitectrure.Persistence.Repositories
             {
                 connection.Open();
                 var result = await connection.QueryFirstOrDefaultAsync<Employee>(query, new { Id = id });
+
+                return result;
+            }
+        }
+
+        public async Task<Employee?> GetByEmailAsync(string email)
+        {
+            var query = "SELECT * FROM Employee WHERE email = @Email";
+
+            using (var connection = this._context.CreateConnection())
+            {
+                connection.Open();
+                var result = await connection.QueryFirstOrDefaultAsync<Employee>(query, new { Email = email });
 
                 return result;
             }

@@ -1,11 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CleanArchitectrure.Application.UseCases.Auth.Commands;
 using MediatR;
-using CleanArchitectrure.Application.UseCases.Employees.Queries.GetAllEmployeeQuery;
-using CleanArchitectrure.Application.UseCases.Employees.Queries.GetByIdEmployeeQuery;
-using CleanArchitectrure.Application.UseCases.Employees.Commands.CreateEmployeeCommand;
-using CleanArchitectrure.Application.UseCases.Employees.Commands.UpdateEmployeeCommand;
-using CleanArchitectrure.Application.UseCases.Employees.Commands.DeleteEmployeeCommand;
-using CleanArchitectrure.Application.UseCases.Auth.Commands;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CleanArchitectrure.WebApi.Controllers
 {

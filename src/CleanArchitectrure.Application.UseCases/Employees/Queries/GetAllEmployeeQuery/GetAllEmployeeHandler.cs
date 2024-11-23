@@ -25,7 +25,7 @@ namespace CleanArchitectrure.Application.UseCases.Employees.Queries.GetAllEmploy
             {
                 var customers = await _unitOfWork.Employees.GetAllAsync();
 
-                if(customers is not null)
+                if (customers is not null)
                 {
                     response.Data = _mapper.Map<IEnumerable<EmployeeDto>>(customers);
                     response.succcess = true;

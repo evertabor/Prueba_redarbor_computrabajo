@@ -2,7 +2,7 @@
 
 namespace CleanArchitectrure.Application.UseCases.Employees.Queries.GetByIdEmployeeQuery
 {
-    public class GetByIdEmployeeValidator: AbstractValidator<GetByIdEmployeeQuery>
+    public class GetByIdEmployeeValidator : AbstractValidator<GetByIdEmployeeQuery>
     {
         public GetByIdEmployeeValidator()
         {

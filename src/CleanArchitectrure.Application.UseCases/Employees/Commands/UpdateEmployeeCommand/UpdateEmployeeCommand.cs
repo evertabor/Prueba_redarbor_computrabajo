@@ -3,7 +3,7 @@ using MediatR;
 
 namespace CleanArchitectrure.Application.UseCases.Employees.Commands.UpdateEmployeeCommand
 {
-    public class UpdateEmployeeCommand: IRequest<BaseResponse<bool>>
+    public class UpdateEmployeeCommand : IRequest<BaseResponse<bool>>
     {
         public int Id { get; set; }
         public int CompanyId { get; set; }

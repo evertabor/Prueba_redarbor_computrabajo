@@ -6,7 +6,7 @@ using CleanArchitectrure.Domain.Entities;
 
 namespace CleanArchitectrure.Application.UseCases.Commons.Mappings
 {
-    public class EmployeeMapper: Profile
+    public class EmployeeMapper : Profile
     {
         public EmployeeMapper()
         {

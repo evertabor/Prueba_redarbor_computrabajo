@@ -2,8 +2,8 @@
 
 namespace CleanArchitectrure.Application.Interface.Persistence
 {
-    public interface ICustomerRepository: IGenericRepository<Employee>
+    public interface IEmployeeRepository: IGenericRepository<Employee>
     {
-
+        Task<Employee?> GetByEmailAsync(string email);
     }
 }

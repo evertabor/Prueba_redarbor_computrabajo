@@ -10,8 +10,7 @@ namespace CleanArchitectrure.Persistence
         public static IServiceCollection AddInjectionPersistence(this IServiceCollection services)
         {
             services.AddDbContext<DataBaseContext>();
-            services.AddScoped<ICustomerRepository, EmployeeRepository>();
-            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             return services;

@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using MediatR;
+﻿using CleanArchitectrure.Application.UseCases.Employees.Commands.CreateEmployeeCommand;
+using CleanArchitectrure.Application.UseCases.Employees.Commands.DeleteEmployeeCommand;
+using CleanArchitectrure.Application.UseCases.Employees.Commands.UpdateEmployeeCommand;
 using CleanArchitectrure.Application.UseCases.Employees.Queries.GetAllEmployeeQuery;
 using CleanArchitectrure.Application.UseCases.Employees.Queries.GetByIdEmployeeQuery;
-using CleanArchitectrure.Application.UseCases.Employees.Commands.CreateEmployeeCommand;
-using CleanArchitectrure.Application.UseCases.Employees.Commands.UpdateEmployeeCommand;
-using CleanArchitectrure.Application.UseCases.Employees.Commands.DeleteEmployeeCommand;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CleanArchitectrure.WebApi.Controllers
 {
@@ -51,7 +51,7 @@ namespace CleanArchitectrure.WebApi.Controllers
         /// <param name="id">id employee</param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetIdAsync([FromQuery] int id)
+        public async Task<IActionResult> GetIdAsync(int id)
         {
             var response = await _mediator.Send(new GetByIdEmployeeQuery() { EmployeeId = id });
             if (response.succcess)
@@ -91,7 +91,7 @@ namespace CleanArchitectrure.WebApi.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteAsync([FromQuery] int id)
+        public async Task<ActionResult> DeleteAsync(int id)
         {
             return Ok(await _mediator.Send(new DeleteEmployeeCommand() { EmployeeId = id }));
         }

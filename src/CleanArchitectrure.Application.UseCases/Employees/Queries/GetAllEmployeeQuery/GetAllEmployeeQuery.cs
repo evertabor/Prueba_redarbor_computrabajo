@@ -4,7 +4,7 @@ using MediatR;
 
 namespace CleanArchitectrure.Application.UseCases.Employees.Queries.GetAllEmployeeQuery
 {
-    public class GetAllEmployeeQuery: IRequest<BaseResponse<IEnumerable<EmployeeDto>>>
+    public class GetAllEmployeeQuery : IRequest<BaseResponse<IEnumerable<EmployeeDto>>>
     {
     }
 }

@@ -6,7 +6,7 @@ namespace CleanArchitectrure.Application.UseCases.Auth.Commands
 {
     public class TokenCommand : IRequest<BaseResponse<TokenDto>>
     {
-        
+
 
     }
 }

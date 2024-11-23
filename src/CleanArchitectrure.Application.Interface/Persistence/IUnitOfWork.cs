@@ -2,8 +2,7 @@
 {
     public interface IUnitOfWork: IDisposable
     {
-        IUserRepository Users { get; }
-        ICustomerRepository Employees { get; }
+        IEmployeeRepository Employees { get; }
         void SaveChanges();
         Task SaveChangesAsync();
 

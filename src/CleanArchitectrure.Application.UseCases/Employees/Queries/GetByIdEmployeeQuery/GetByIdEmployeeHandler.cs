@@ -23,7 +23,7 @@ namespace CleanArchitectrure.Application.UseCases.Employees.Queries.GetByIdEmplo
         {
             var response = new BaseResponse<EmployeeDto>();
 
-            var employee = await _unitOfWork.Employees.GetAsync(request.EmployeeId);
+            var employee = await _unitOfWork.Employees.GetByIdAsync(request.EmployeeId);
             if (employee == null)
             {
                 throw new NotFoundExceptionCustom($"El empleado con el Id ({request.EmployeeId}) no existe");

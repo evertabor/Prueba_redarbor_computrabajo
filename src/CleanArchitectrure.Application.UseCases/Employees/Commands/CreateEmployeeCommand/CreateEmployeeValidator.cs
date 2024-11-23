@@ -2,7 +2,7 @@
 
 namespace CleanArchitectrure.Application.UseCases.Employees.Commands.CreateEmployeeCommand
 {
-    public class CreateEmployeeValidator: AbstractValidator<CreateEmployeeCommand>
+    public class CreateEmployeeValidator : AbstractValidator<CreateEmployeeCommand>
     {
         public CreateEmployeeValidator()
         {

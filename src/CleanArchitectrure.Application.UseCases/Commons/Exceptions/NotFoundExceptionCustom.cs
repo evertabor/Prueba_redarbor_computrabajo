@@ -2,7 +2,6 @@
 {
     public class NotFoundExceptionCustom : Exception
     {
-
         public NotFoundExceptionCustom()
             : base("The requested resource was not found.")
         {

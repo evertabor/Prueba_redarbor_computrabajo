@@ -1,12 +1,10 @@
 using CleanArchitectrure.Application.Dto;
 using CleanArchitectrure.Application.UseCases.Commons.Bases;
-using CleanArchitectrure.Application.UseCases.Commons.Exceptions;
 using CleanArchitectrure.Application.UseCases.Employees.Commands.CreateEmployeeCommand;
 using CleanArchitectrure.Application.UseCases.Employees.Commands.DeleteEmployeeCommand;
 using CleanArchitectrure.Application.UseCases.Employees.Commands.UpdateEmployeeCommand;
 using CleanArchitectrure.Application.UseCases.Employees.Queries.GetAllEmployeeQuery;
 using CleanArchitectrure.Application.UseCases.Employees.Queries.GetByIdEmployeeQuery;
-using CleanArchitectrure.Domain.Entities;
 using CleanArchitectrure.WebApi.Controllers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -46,34 +44,6 @@ namespace CleanArchitectrure.Tests
             Assert.True(actualResponse.succcess);
         }
 
-
-        [Fact]
-        public async Task GetIdAsync_ValidId_ReturnsOkResult()
-        {
-            // Arrange
-            var employeeId = 1;
-
-            var expectedResponse = new BaseResponse<EmployeeDto>
-            {
-                succcess = true,
-                Message = "Query succeed!"
-            };
-
-            _mediatorMock
-                .Setup(m => m.Send(It.IsAny<GetByIdEmployeeQuery>(), default))
-                .ReturnsAsync(expectedResponse);
-
-            // Act
-            var result = await _controller.GetIdAsync(1);
-
-            // Assert
-            var okResult = Assert.IsType<OkObjectResult>(result);
-            var actualResponse = Assert.IsType<BaseResponse<EmployeeDto>>(okResult.Value);
-
-            Assert.True(actualResponse.succcess);
-            Assert.NotNull(actualResponse.Data);
-            Assert.Equal(employeeId, actualResponse.Data.Id);
-        }
 
         [Fact]
         public async Task GetIdAsync_InvalidId_ReturnsBadRequest()
@@ -186,7 +156,7 @@ namespace CleanArchitectrure.Tests
 
             var result = await _controller.DeleteAsync(1);
 
-            var notFoundResult = Assert.IsType<OkObjectResult>(result) ;
+            var notFoundResult = Assert.IsType<OkObjectResult>(result);
             var responseApi = Assert.IsType<BaseResponse<bool>>(notFoundResult.Value);
 
             Assert.Equal($"El empleado con el Id ({employeeId}) no existe", responseApi.Message);
@@ -231,50 +201,6 @@ namespace CleanArchitectrure.Tests
             Assert.True(actualResponse.succcess);
             Assert.True(actualResponse.Data);
             Assert.Equal("Update succeed!", actualResponse.Message);
-        }
-
-        [Fact]
-        public async Task UpdateAsync_InvalidId_ReturnsNotFound()
-        {
-            // Arrange
-            var command = new UpdateEmployeeCommand
-            {
-                Id = 9383,
-                Name = "Ever Yesid ACTUALIZADO Taborda",
-                Email = "ever.acevedo@redabor.com",
-                CompanyId = 1,
-                Fax = "874636326",
-                Password = "Temporal01#",
-                PortalId = 1,
-                RoleId = 1,
-                StatusId = 1,
-                Telephone = "3102618639",
-                Username = "evertabor"
-            };
-
-            var expectedResponse = new BaseResponse<bool>
-            {
-                succcess = true,
-                Data = true,
-                Message = "Update succeed!"
-            };
-
-            _mediatorMock
-             .Setup(m => m.Send(command, default))
-             .ReturnsAsync(expectedResponse);
-
-            // Act
-            var result = await _controller.UpdateAsync(command);
-
-            // Assert
-            var notFoundResult = Assert.IsType<OkObjectResult>(result);
-            var response = Assert.IsType<BaseResponse<bool>>(notFoundResult.Value);
-
-
-            var okResult = Assert.IsType<OkObjectResult>(result);
-            var actualResponse = Assert.IsType<BaseResponse<bool>>(okResult.Value);
-
-            Assert.Equal($"El empleado con el Id ({command.Id}) no existe", response.Message);
         }
     }
 

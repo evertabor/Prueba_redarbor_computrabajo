@@ -1,17 +1,11 @@
 ﻿using CleanArchitectrure.Application.Dto;
 using CleanArchitectrure.Application.UseCases.Commons.Bases;
-using CleanArchitectrure.Domain.Entities;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
-using System.Data;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace CleanArchitectrure.Application.UseCases.Auth.Commands
 {

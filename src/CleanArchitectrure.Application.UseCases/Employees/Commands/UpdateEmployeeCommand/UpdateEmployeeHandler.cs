@@ -22,7 +22,7 @@ namespace CleanArchitectrure.Application.UseCases.Employees.Commands.UpdateEmplo
         {
             var response = new BaseResponse<bool>();
 
-            var employee = await _unitOfWork.Employees.GetAsync(command.Id);
+            var employee = await _unitOfWork.Employees.GetByIdAsync(command.Id);
             if (employee == null)
             {
                 throw new NotFoundExceptionCustom($"El empleado con el Id ({command.Id}) no existe");

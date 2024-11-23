@@ -5,14 +5,11 @@ namespace CleanArchitectrure.Persistence.Repositories
 {
     internal class UnitOfWork : IUnitOfWork
     {
-        public IUserRepository Users { get; }
-
-        public ICustomerRepository Employees { get; }
+        public IEmployeeRepository Employees { get; }
         private readonly DataBaseContext _context;
 
-        public UnitOfWork(DataBaseContext context, IUserRepository users, ICustomerRepository customers)
+        public UnitOfWork(DataBaseContext context, IEmployeeRepository customers)
         {
-            Users = users ?? throw new ArgumentNullException(nameof(users));
             Employees = customers ?? throw new ArgumentNullException(nameof(customers));
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }

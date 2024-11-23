@@ -20,7 +20,7 @@ namespace CleanArchitectrure.Application.UseCases.Employees.Commands.DeleteEmplo
         public async Task<BaseResponse<bool>> Handle(DeleteEmployeeCommand command, CancellationToken cancellationToken)
         {
             var response = new BaseResponse<bool>();
-            var employee = await _unitOfWork.Employees.GetAsync(command.EmployeeId);
+            var employee = await _unitOfWork.Employees.GetByIdAsync(command.EmployeeId);
 
             if (employee == null)
             {

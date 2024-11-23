@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
-using System.Text.Json.Serialization;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace CleanArchitectrure.WebApi.Converters
 {
@@ -12,9 +12,9 @@ namespace CleanArchitectrure.WebApi.Converters
     {
         private readonly string[] _formats =
         {
-            "yyyy-MM-ddTHH:mm:ss",   
-            "yyyy-MM-dd HH:mm:ss",   
-            "yyyy-MM-dd"            
+            "yyyy-MM-ddTHH:mm:ss",
+            "yyyy-MM-dd HH:mm:ss",
+            "yyyy-MM-dd"
          };
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace CleanArchitectrure.WebApi.Converters
 
             if (DateTime.TryParse(value, CultureInfo.InvariantCulture, out var date))
             {
-                return date; 
+                return date;
             }
 
             throw new JsonException($"Fecha inválida: {value}");

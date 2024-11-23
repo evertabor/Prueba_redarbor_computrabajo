@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CleanArchitectrure.Application.Interface.Persistence;
 using CleanArchitectrure.Application.UseCases.Commons.Bases;
+using CleanArchitectrure.Application.UseCases.Commons.Exceptions;
 using CleanArchitectrure.Domain.Entities;
 using MediatR;
 
@@ -21,24 +22,23 @@ namespace CleanArchitectrure.Application.UseCases.Employees.Commands.CreateEmplo
         {
             var response = new BaseResponse<bool>();
 
-            try
+            var employee = _mapper.Map<Employee>(command);
+
+            var employeeResult = await _unitOfWork.Employees.GetByEmailAsync(command.Email);
+            if (employeeResult != null)
             {
-                var employee = _mapper.Map<Employee>(command);
-                _unitOfWork.Employees.Insert(employee);
-
-                await _unitOfWork.SaveChangesAsync();
-                response.Data = true;
-
-                if (response.Data)
-                {
-                    response.succcess = true;
-                    response.Message = "Create succeed!";
-                }
+                throw new AlreadyExistsExceptionCustom($"Ya existe un empleado con el Email ({command.Email})");
             }
-            catch (Exception ex)
+
+            _unitOfWork.Employees.Insert(employee);
+
+            await _unitOfWork.SaveChangesAsync();
+            response.Data = true;
+
+            if (response.Data)
             {
-                response.Message = ex.Message;
-                response.Data = false;
+                response.succcess = true;
+                response.Message = "Create succeed!";
             }
 
             return response;

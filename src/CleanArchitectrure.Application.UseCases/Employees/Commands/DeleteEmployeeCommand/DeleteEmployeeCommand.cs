@@ -3,7 +3,7 @@ using MediatR;
 
 namespace CleanArchitectrure.Application.UseCases.Employees.Commands.DeleteEmployeeCommand
 {
-    public class DeleteEmployeeCommand: IRequest<BaseResponse<bool>>
+    public class DeleteEmployeeCommand : IRequest<BaseResponse<bool>>
     {
         public int EmployeeId { get; set; }
     }
