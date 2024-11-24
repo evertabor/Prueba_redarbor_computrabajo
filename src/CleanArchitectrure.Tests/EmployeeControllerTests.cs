@@ -9,6 +9,7 @@ using CleanArchitectrure.WebApi.Controllers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
+using Xunit;
 
 namespace CleanArchitectrure.Tests
 {
@@ -203,5 +204,4 @@ namespace CleanArchitectrure.Tests
             Assert.Equal("Update succeed!", actualResponse.Message);
         }
     }
-
 }
