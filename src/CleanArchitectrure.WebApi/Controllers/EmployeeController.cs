@@ -1,4 +1,6 @@
-﻿using CleanArchitectrure.Application.UseCases.Employees.Commands.CreateEmployeeCommand;
+﻿using AutoMapper;
+using CleanArchitectrure.Application.Dto;
+using CleanArchitectrure.Application.UseCases.Employees.Commands.CreateEmployeeCommand;
 using CleanArchitectrure.Application.UseCases.Employees.Commands.DeleteEmployeeCommand;
 using CleanArchitectrure.Application.UseCases.Employees.Commands.UpdateEmployeeCommand;
 using CleanArchitectrure.Application.UseCases.Employees.Queries.GetAllEmployeeQuery;
@@ -18,15 +20,18 @@ namespace CleanArchitectrure.WebApi.Controllers
     public class EmployeeController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly IMapper _mapper;
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="mediator"></param>
+        /// <param name="mapper"></param>
         /// <exception cref="ArgumentNullException"></exception>
-        public EmployeeController(IMediator mediator)
+        public EmployeeController(IMediator mediator, IMapper mapper)
         {
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         /// <summary>
@@ -64,25 +69,23 @@ namespace CleanArchitectrure.WebApi.Controllers
         /// <summary>
         /// Add a new item
         /// </summary>
-        /// <param name="command">Comando</param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult> InsertAsync([FromBody] CreateEmployeeCommand command)
+        public async Task<ActionResult> InsertAsync([FromBody] EmployeeDto employee)
         {
-            if (command is null) return BadRequest();
-            return Ok(await _mediator.Send(command));
+            if (employee is null) return BadRequest();
+            return Ok(await _mediator.Send(_mapper.Map<CreateEmployeeCommand>(employee)));
         }
 
         /// <summary>
         /// Update an existingitem
         /// </summary>
-        /// <param name="command"></param>
         /// <returns></returns>
         [HttpPut]
-        public async Task<ActionResult> UpdateAsync([FromBody] UpdateEmployeeCommand command)
+        public async Task<ActionResult> UpdateAsync([FromBody] EmployeeDto employee)
         {
-            if (command is null) return BadRequest();
-            return Ok(await _mediator.Send(command));
+            if (employee is null) return BadRequest();
+            return Ok(await _mediator.Send(_mapper.Map<UpdateEmployeeCommand>(employee)));
         }
 
         /// <summary>

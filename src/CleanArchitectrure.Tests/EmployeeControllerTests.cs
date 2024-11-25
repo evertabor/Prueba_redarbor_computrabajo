@@ -1,3 +1,4 @@
+using AutoMapper;
 using CleanArchitectrure.Application.Dto;
 using CleanArchitectrure.Application.UseCases.Commons.Bases;
 using CleanArchitectrure.Application.UseCases.Employees.Commands.CreateEmployeeCommand;
@@ -17,11 +18,14 @@ namespace CleanArchitectrure.Tests
     {
         private readonly Mock<IMediator> _mediatorMock;
         private readonly EmployeeController _controller;
+        private readonly Mock<IMapper> _mapperMock;
 
         public EmployeeControllerTests()
         {
             _mediatorMock = new Mock<IMediator>();
-            _controller = new EmployeeController(_mediatorMock.Object);
+            _mapperMock = new Mock<IMapper>();
+            _controller = new EmployeeController(_mediatorMock.Object, _mapperMock.Object);
+
         }
 
         [Fact]
@@ -77,7 +81,7 @@ namespace CleanArchitectrure.Tests
         [Fact]
         public async Task InsertAsync_ValidCommand_ReturnsOkResult()
         {
-            var createEmployeeCommand = new CreateEmployeeCommand
+            var employeeDto = new EmployeeDto
             {
                 Name = "Ever Yesid Acevedo Taborda",
                 Email = "ever.acevedo@redabor.com",
@@ -98,11 +102,12 @@ namespace CleanArchitectrure.Tests
                 Message = "Create succeed!"
             };
 
+ 
             _mediatorMock
-               .Setup(m => m.Send(createEmployeeCommand, default))
-               .ReturnsAsync(expectedResponse);
+                .Setup(m => m.Send(It.IsAny<CreateEmployeeCommand>(), default))
+                .ReturnsAsync(expectedResponse);
 
-            var result = await _controller.InsertAsync(createEmployeeCommand);
+            var result = await _controller.InsertAsync(employeeDto);
 
             var okResult = Assert.IsType<OkObjectResult>(result);
             var actualResponse = Assert.IsType<BaseResponse<bool>>(okResult.Value);
@@ -166,7 +171,7 @@ namespace CleanArchitectrure.Tests
         [Fact]
         public async Task UpdateAsync_ValidRequest_ReturnsOkResult()
         {
-            var command = new UpdateEmployeeCommand
+            var employeeUpdate = new EmployeeDto
             {
                 Id = 1,
                 Name = "Ever Yesid ACTUALIZADO Taborda",
@@ -193,7 +198,7 @@ namespace CleanArchitectrure.Tests
                 .ReturnsAsync(expectedResponse);
 
             // Act
-            var result = await _controller.UpdateAsync(command);
+            var result = await _controller.UpdateAsync(employeeUpdate);
 
             // Assert
             var okResult = Assert.IsType<OkObjectResult>(result);

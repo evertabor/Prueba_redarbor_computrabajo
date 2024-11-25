@@ -9,11 +9,12 @@
             Controller to manage employees
             </summary>
         </member>
-        <member name="M:CleanArchitectrure.WebApi.Controllers.EmployeeController.#ctor(MediatR.IMediator)">
+        <member name="M:CleanArchitectrure.WebApi.Controllers.EmployeeController.#ctor(MediatR.IMediator,AutoMapper.IMapper)">
             <summary>
             Constructor
             </summary>
             <param name="mediator"></param>
+            <param name="mapper"></param>
             <exception cref="T:System.ArgumentNullException"></exception>
         </member>
         <member name="M:CleanArchitectrure.WebApi.Controllers.EmployeeController.GetAllAsync">
@@ -29,18 +30,16 @@
             <param name="id">id employee</param>
             <returns></returns>
         </member>
-        <member name="M:CleanArchitectrure.WebApi.Controllers.EmployeeController.InsertAsync(CleanArchitectrure.Application.UseCases.Employees.Commands.CreateEmployeeCommand.CreateEmployeeCommand)">
+        <member name="M:CleanArchitectrure.WebApi.Controllers.EmployeeController.InsertAsync(CleanArchitectrure.Application.Dto.EmployeeDto)">
             <summary>
             Add a new item
             </summary>
-            <param name="command">Comando</param>
             <returns></returns>
         </member>
-        <member name="M:CleanArchitectrure.WebApi.Controllers.EmployeeController.UpdateAsync(CleanArchitectrure.Application.UseCases.Employees.Commands.UpdateEmployeeCommand.UpdateEmployeeCommand)">
+        <member name="M:CleanArchitectrure.WebApi.Controllers.EmployeeController.UpdateAsync(CleanArchitectrure.Application.Dto.EmployeeDto)">
             <summary>
             Update an existingitem
             </summary>
-            <param name="command"></param>
             <returns></returns>
         </member>
         <member name="M:CleanArchitectrure.WebApi.Controllers.EmployeeController.DeleteAsync(System.Int32)">

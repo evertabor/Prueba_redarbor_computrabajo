@@ -13,6 +13,8 @@ namespace CleanArchitectrure.Application.UseCases.Commons.Mappings
             CreateMap<Employee, EmployeeDto>().ReverseMap();
             CreateMap<Employee, CreateEmployeeCommand>().ReverseMap();
             CreateMap<Employee, UpdateEmployeeCommand>().ReverseMap();
+            CreateMap<EmployeeDto, UpdateEmployeeCommand>().ReverseMap();
+            CreateMap<EmployeeDto, CreateEmployeeCommand>().ReverseMap();
         }
     }
 }
